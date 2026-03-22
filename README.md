@@ -1,14 +1,50 @@
-Job Portal Management System
+# 🚀 Job Portal Management System
 
-This project is a relational database design using Oracle SQL.
+A relational database project designed using Oracle SQL to manage job postings, candidate applications, and interview processes.
 
-It includes:
-- Schema creation (tables & constraints)
-- Sample data insertion
-- SQL queries for data retrieval
+---
 
-Tables:
-Candidate, Company, Job, Application, Interview
+## 📂 Tables
 
-Concepts Used:
-Primary Key, Foreign Key, Joins, Normalization
+👤 Candidate
+🏢 Company
+💼 Job
+📄 Application
+🎤 Interview
+
+---
+
+## ⚙️ Key Concepts
+
+✔ Primary Key & Foreign Key
+✔ One-to-Many & Many-to-Many Relationships
+✔ Joins & Data Retrieval Queries
+✔ Normalization
+
+---
+
+## 🗂 Project Structure
+
+📁 01_schema.sql → Table creation & constraints
+📁 02_insert_data.sql → Sample data
+📁 03_queries.sql → SQL queries
+
+---
+
+## ▶️ How to Run
+
+1 Run 01_schema.sql
+2 Run 02_insert_data.sql
+3 Run 03_queries.sql
+
+---
+
+## 🛠 Tools Used
+
+🗄 Oracle Database 11g
+💻 SQL / SQL*Plus
+📊 dbdiagram.io
+
+---
+
+📌 For detailed explanation, refer to the project report.
