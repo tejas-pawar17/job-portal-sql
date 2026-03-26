@@ -82,20 +82,20 @@ SQL> SELECT C.NAME, MAX(A.APPLY_DATE)
   3  ON C.CANDIDATE_ID = A.CANDIDATE_ID
   4  GROUP BY C.NAME;
 
-SQL> -- 15. Display first and last name using SUBSTR and INSTR
-SQL> SELECT SUBSTR(NAME,1,INSTR(NAME,' ')-1),
-  2  SUBSTR(NAME,INSTR(NAME,' ')+1)
-  3  FROM CANDIDATE;
-
-SQL> -- 16. Display email username and domain
-SQL> SELECT SUBSTR(EMAIL,1,INSTR(EMAIL,'@')-1),
-  2  SUBSTR(EMAIL,INSTR(EMAIL,'@')+1)
-  3  FROM CANDIDATE;
-
-SQL> -- 17. Display candidates whose email is gmail
+SQL> -- 15. Display candidates whose name is palindrome
 SQL> SELECT NAME
   2  FROM CANDIDATE
-  3  WHERE SUBSTR(EMAIL,INSTR(EMAIL,'@')+1) = 'gmail.com';
+  3  WHERE NAME = REVERSE(NAME);
+
+SQL> -- 16. Display candidates whose name length is even
+SQL> SELECT NAME
+  2  FROM CANDIDATE
+  3  WHERE MOD(LENGTH(NAME),2) = 0;
+
+SQL> -- 17. Display candidates whose name starts and ends with same character
+SQL> SELECT NAME
+  2  FROM CANDIDATE
+  3  WHERE SUBSTR(NAME,1,1) = SUBSTR(NAME,-1,1);
 
 SQL> -- 18. Display candidates having more than one 'a'
 SQL> SELECT NAME
@@ -117,10 +117,11 @@ SQL> SELECT JOB_TITLE, SALARY
   2  FROM JOB
   3  ORDER BY SALARY DESC;
 
-SQL> -- 22. Display number of candidates per city
-SQL> SELECT CITY, COUNT(*)
-  2  FROM CANDIDATE
-  3  GROUP BY CITY;
+SQL> -- 22. Display number of applications per candidate
+SQL> SELECT C.NAME, COUNT(A.APPLICATION_ID)
+  2  FROM CANDIDATE C JOIN APPLICATION A
+  3  ON C.CANDIDATE_ID = A.CANDIDATE_ID
+  4  GROUP BY C.NAME;
 
 SQL> -- 23. Display company names where more than 2 jobs are posted
 SQL> SELECT C.COMPANY_NAME
@@ -128,6 +129,21 @@ SQL> SELECT C.COMPANY_NAME
   3  ON C.COMPANY_ID = J.COMPANY_ID
   4  GROUP BY C.COMPANY_NAME
   5  HAVING COUNT(J.JOB_ID) > 2;
+
+SQL> -- 24. Display candidates whose name has no vowels
+SQL> SELECT NAME
+  2  FROM CANDIDATE
+  3  WHERE LOWER(NAME) NOT LIKE '%a%'
+  4  AND LOWER(NAME) NOT LIKE '%e%'
+  5  AND LOWER(NAME) NOT LIKE '%i%'
+  6  AND LOWER(NAME) NOT LIKE '%o%'
+  7  AND LOWER(NAME) NOT LIKE '%u%'
+
+SQL> -- 25. Display candidates whose name length is greater than average length
+SQL> SELECT NAME
+  2  FROM CANDIDATE
+  3  WHERE LENGTH(NAME) > ( SELECT AVG(LENGTH(NAME))
+  4  FROM CANDIDATE );
 
 SQL>
 SPOOL OFF;
