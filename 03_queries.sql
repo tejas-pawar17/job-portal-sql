@@ -145,5 +145,26 @@ SQL> SELECT NAME
   3  WHERE LENGTH(NAME) > ( SELECT AVG(LENGTH(NAME))
   4  FROM CANDIDATE );
 
+SQL> -- 26. Display names of candidates who got selected for the job
+SQL> SELECT C.NAME
+  2  FROM CANDIDATE C JOIN APPLICATION A
+  3  ON C.CANDIDATE_ID = A.CANDIDATE_ID JOIN INTERVIEW I
+  4  ON I.APPLICATION_ID = A.APPLICATION_ID
+  5  WHERE A.status = 'Selected'
+
+SQL> -- 27. Display names of candidates who passed the interview average length
+SQL> SELECT C.NAME
+  2  FROM CANDIDATE C JOIN APPLICATION A
+  3  ON C.CANDIDATE_ID = A.CANDIDATE_ID JOIN INTERVIEW I
+  4  ON I.APPLICATION_ID = A.APPLICATION_ID
+  5  WHERE I.Result = 'Pass'
+
+SQL> -- 28. Display names of candidates who failed the interview average length
+SQL> SELECT C.NAME
+  2  FROM CANDIDATE C JOIN APPLICATION A
+  3  ON C.CANDIDATE_ID = A.CANDIDATE_ID JOIN INTERVIEW I
+  4  ON I.APPLICATION_ID = A.APPLICATION_ID
+  5  WHERE I.Result = 'Fail'
+
 SQL>
 SPOOL OFF;
